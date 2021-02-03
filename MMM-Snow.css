@@ -27,10 +27,9 @@
 .MMM-Snow .snow2 {background-image: url('images/snow2.png');}
 .MMM-Snow .snow3 {background-image: url('images/snow3.png');}
 
-.MMM-Snow .heart1 {background-image: url('images/heart1.png');}
-.MMM-Snow .heart2 {background-image: url('images/heart2.png');}
+.MMM-Snow .none {background-image: url('images/none.png');}
 
-.MMM-Snow .bubble1 {background-image: url('images/bubble1.png');}
+.MMM-Snow .rain1 {background-image: url('images/rain1.png');}
 
 @keyframes flake-downwards {
     from {transform: translateY(0vh)}
