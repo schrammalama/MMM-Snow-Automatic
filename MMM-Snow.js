@@ -18,20 +18,9 @@ Module.register("MMM-Snow",{
 
 	themes: {
 		"winter" : { 
-			"flakePrefix"  : "snow",    // prefix of css name, e.g. snow1 
+			"flakePrefix"  : flake,    // prefix of css name, e.g. snow1 
 			"imagesCount"  : 3,         // number of images available in this theme, here:  snow1, snow2, snow3
 			"downwards"    : true,      // direction of flake movements, snow goes downwards
-			"sizeFactor"   : 1},        // adapt size of flakes to your liking, use original flake size
-		"love"   : { 
-			"flakePrefix" : "heart",    // prefix of css name, e.g. heart1 
-			"imagesCount"  : 2,         // number of images in this theme, here:  heart1, heart2
-			"downwards"    : false,     // direction of flake movements, hearts raise upwards			
-			"sizeFactor"   : 2},        // adapt size of flakes to your liking, we like bigger hearts
-		"water"   : { 
-			"flakePrefix" : "bubble",   // prefix of css name, e.g. bubble1 
-			"imagesCount"  : 1,         // number of images in this theme, here:  bubble1
-			"downwards"    : false,     // direction of flake movements, bubbles raise upwards			
-			"sizeFactor"   : 2}         // adapt size of flakes to your liking, we like bigger bubbles
 	},
 
 	getStyles: function() {
@@ -81,10 +70,13 @@ Module.register("MMM-Snow",{
 		}
 		return wrapper;
 	}
+	var myVar = setInterval(myFunction, 1000000);
+ 	function myFunction() {
+    	location.reload();
+	}
 
 });
 
-function snowRefresh() {
 	fetch('https://api.openweathermap.org/data/2.5/weather?id="your city id"&appid="your api key"')
  .then(function(resp) { return resp.json() }) // Convert data to json
  .then(function(data) {
@@ -95,20 +87,19 @@ function snowRefresh() {
  });
 function drawWeather( d ) {
    if (d.weather[0].description == "light snow") {
-       var wnd = window.open("http://"remote ip":8080/api/module/MMM-Snow/show");
-       setTimeout(function() {
-           wnd.close();
-       }, 5000);
+       var flake = snow;
+   } else if (d.weather[0].description == "moderate snow") {
+	   var flake = snow;
+   } else if (d.weather[0].description == "heavy snow") {
+	   var flake = snow;
+   } else if (d.weather[0].description == "light rain") {
+	   var flake = rain;
+   } else if (d.weather[0].description == "moderate rain") {
+	   var flake = rain;
+   } else if (d.weather[0].description == "heavy rain") {
+	   var flake = rain;
    } else {
-       var wnd = window.open("http://"remote ip":8080/api/module/MMM-Snow/hide");
-       setTimeout(function() {
-       wnd.close();
-       }, 5000);
+       var flake = none;
    }
 }
-// This is it reloading every ten minutes
-var myVar = setInterval(myFunction, 1000000);
- function myFunction() {
-    location.reload();
-}
-} 
+
