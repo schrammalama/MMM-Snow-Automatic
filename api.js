@@ -1,7 +1,7 @@
 
       // This is where it calls the weather api for data
     function weatherBalloon( cityID ) {
-  var key = '43a6677e78ccfd66a61091586d78a3c0';
+  var key = '';
   fetch('https://api.openweathermap.org/data/2.5/weather?id=' + cityID+ '&appid=' + key)
   .then(function(resp) { return resp.json() }) // Convert data to json
   .then(function(data) {
