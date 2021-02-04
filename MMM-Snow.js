@@ -9,7 +9,8 @@
  * file names and css class names.
  */
 
-Module.register("MMM-Snow",{
+var type;
+Module.register("MMM-Snow-Automatic",{
 
 	defaults: {
 		flakeCount: 100,
@@ -18,15 +19,43 @@ Module.register("MMM-Snow",{
 
 	themes: {
 		"winter" : { 
-			"flakePrefix"  : flake,    // prefix of css name, e.g. snow1 
-			"imagesCount"  : 3,         // number of images available in this theme, here:  snow1, snow2, snow3
+			"flakePrefix"  : type,    // prefix of css name, e.g. snow1 
+			"imagesCount"  : 1,         // number of images available in this theme, here:  snow1, snow2, snow3
 			"downwards"    : true,      // direction of flake movements, snow goes downwards
+			"sizeFactor"   : 1},        // adapt size of flakes to your liking, use original flake size
 	},
 
 	getStyles: function() {
-		return [ "MMM-Snow.css" ]
+		return [ "MMM-Snow-Automatic.css" ]
 	},
 
+find: function( d ) {
+fetch('https://api.openweathermap.org/data/2.5/weather?id=5746545&appid=43a6677e78ccfd66a61091586d78a3c0')
+ .then(function(resp) { return resp.json() }) // Convert data to json
+ .then(function(data) {
+   drawWeather(data);
+ })
+ .catch(function() {
+   // catch any errors
+ });
+
+
+   if (d.weather[0].description == "overcast clouds") {
+       type = "snow";
+   } else if (d.weather[0].description == "moderate snow") {
+	   type = "snow";
+   } else if (d.weather[0].description == "heavy snow") {
+	   type = "snow";
+   } else if (d.weather[0].description == "light rain") {
+	   type = "rain";
+   } else if (d.weather[0].description == "moderate rain") {
+	   type = "rain";
+   } else if (d.weather[0].description == "heavy rain") {
+	   type = "rain";
+   } else {
+       type = "snow";
+   }
+},
 	getDom: function() {
 		var themeSettings = this.themes[this.config.theme];
 		var wrapper = document.createElement("div")
@@ -70,36 +99,6 @@ Module.register("MMM-Snow",{
 		}
 		return wrapper;
 	}
-	var myVar = setInterval(myFunction, 1000000);
- 	function myFunction() {
-    	location.reload();
-	}
 
 });
-
-	fetch('https://api.openweathermap.org/data/2.5/weather?id="your city id"&appid="your api key"')
- .then(function(resp) { return resp.json() }) // Convert data to json
- .then(function(data) {
-   drawWeather(data);
- })
- .catch(function() {
-   // catch any errors
- });
-function drawWeather( d ) {
-   if (d.weather[0].description == "light snow") {
-       var flake = snow;
-   } else if (d.weather[0].description == "moderate snow") {
-	   var flake = snow;
-   } else if (d.weather[0].description == "heavy snow") {
-	   var flake = snow;
-   } else if (d.weather[0].description == "light rain") {
-	   var flake = rain;
-   } else if (d.weather[0].description == "moderate rain") {
-	   var flake = rain;
-   } else if (d.weather[0].description == "heavy rain") {
-	   var flake = rain;
-   } else {
-       var flake = none;
-   }
-}
 
