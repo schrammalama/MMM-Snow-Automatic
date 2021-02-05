@@ -30,7 +30,7 @@ Module.register("MMM-Snow-Automatic",{
 	},
 
 find: function( d ) {
-fetch('https://api.openweathermap.org/data/2.5/weather?id=5746545&appid=43a6677e78ccfd66a61091586d78a3c0')
+fetch('https://api.openweathermap.org/data/2.5/weather?id=&appid=')
  .then(function(resp) { return resp.json() }) // Convert data to json
  .then(function(data) {
    drawWeather(data);
