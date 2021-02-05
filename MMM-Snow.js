@@ -9,7 +9,33 @@
  * file names and css class names.
  */
 
-var type;
+	fetch('https://api.openweathermap.org/data/2.5/weather?id=5746545&appid=43a6677e78ccfd66a61091586d78a3c0')
+	 .then(function(resp) { return resp.json() }) // Convert data to json
+	 .then(function(data) {
+	   drawWeather(data);
+	 })
+	 .catch(function() {
+	   // catch any errors
+	 });
+	
+function drawWeather( d ) {
+	var type;
+	   if (d.weather[0].description == "broken clouds") {
+		    type = "snow";
+	   } else if (d.weather[0].description == "moderate snow") {
+		   type = "snow";
+	   } else if (d.weather[0].description == "heavy snow") {
+		   type = "snow";
+	   } else if (d.weather[0].description == "light rain") {
+		   type = "rain";
+	   } else if (d.weather[0].description == "moderate rain") {
+		   type = "rain";
+	   } else if (d.weather[0].description == "heavy rain") {
+		   type = "rain";
+	   } else {
+		   type = "snow";
+	   }
+	}
 Module.register("MMM-Snow-Automatic",{
 
 	defaults: {
@@ -28,34 +54,6 @@ Module.register("MMM-Snow-Automatic",{
 	getStyles: function() {
 		return [ "MMM-Snow-Automatic.css" ]
 	},
-
-find: function( d ) {
-fetch('https://api.openweathermap.org/data/2.5/weather?id=&appid=')
- .then(function(resp) { return resp.json() }) // Convert data to json
- .then(function(data) {
-   drawWeather(data);
- })
- .catch(function() {
-   // catch any errors
- });
-
-
-   if (d.weather[0].description == "overcast clouds") {
-       type = "snow";
-   } else if (d.weather[0].description == "moderate snow") {
-	   type = "snow";
-   } else if (d.weather[0].description == "heavy snow") {
-	   type = "snow";
-   } else if (d.weather[0].description == "light rain") {
-	   type = "rain";
-   } else if (d.weather[0].description == "moderate rain") {
-	   type = "rain";
-   } else if (d.weather[0].description == "heavy rain") {
-	   type = "rain";
-   } else {
-       type = "snow";
-   }
-},
 	getDom: function() {
 		var themeSettings = this.themes[this.config.theme];
 		var wrapper = document.createElement("div")
