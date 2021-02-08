@@ -1,18 +1,18 @@
-.MMM-Snow .flake-downwards {
+.MMM-Snow-Automatic .flake-downwards {
     position: absolute;
     top: -50px;
     animation-name: flake-downwards;
     animation-iteration-count: infinite;
 }
 
-.MMM-Snow .flake-upwards {
+.MMM-Snow-Automatic .flake-upwards {
     position: absolute;
     top: -50px;
     animation-name: flake-upwards;
     animation-iteration-count: infinite;
 }
 
-.MMM-Snow *[class|="flake"] div {
+.MMM-Snow-Automatic *[class|="flake"] div {
     width: 20px;
     height: 20px;
 
@@ -23,13 +23,11 @@
     animation-iteration-count: infinite;
 }
 
-.MMM-Snow .snow1 {background-image: url('images/snow1.png');}
-.MMM-Snow .snow2 {background-image: url('images/snow2.png');}
-.MMM-Snow .snow3 {background-image: url('images/snow3.png');}
+.MMM-Snow-Automatic .snow1 {background-image: url('images/snow1.png');}
 
-.MMM-Snow .none {background-image: url('images/none.png');}
+.MMM-Snow-Automatic .none1 {background-image: url('images/none1.png');}
 
-.MMM-Snow .rain1 {background-image: url('images/rain1.png');}
+.MMM-Snow-Automatic .rain1 {background-image: url('images/rain1.png');}
 
 @keyframes flake-downwards {
     from {transform: translateY(0vh)}
