@@ -8,6 +8,8 @@
  * the specific themed items are called 'snow' or 'heart'. This applies to variable names
  * file names and css class names.
  */
+var type;
+var weather;
 
 	fetch('https://api.openweathermap.org/data/2.5/weather?id=5746545&appid=43a6677e78ccfd66a61091586d78a3c0')
 	 .then(function(resp) { return resp.json() }) // Convert data to json
@@ -17,31 +19,36 @@
 	 .catch(function() {
 	   // catch any errors
 	 });
-	
 function drawWeather( d ) {
-	var type;
-	   if (d.weather[0].description == "broken clouds") {
+	weather = d.weather[0].description;
+				
+	   if (weather == "overcast clouds") {
 		    type = "snow";
-	   } else if (d.weather[0].description == "moderate snow") {
-		   type = "snow";
-	   } else if (d.weather[0].description == "heavy snow") {
-		   type = "snow";
-	   } else if (d.weather[0].description == "light rain") {
+	   } else if (weather == "broken snow") {
 		   type = "rain";
-	   } else if (d.weather[0].description == "moderate rain") {
+	   } else if (weather == "heavy snow") {
+		   type = "snow";
+	   } else if (weather == "light rain") {
 		   type = "rain";
-	   } else if (d.weather[0].description == "heavy rain") {
+	   } else if (weather == "moderate rain") {
+		   type = "rain";
+	   } else if (weather == "heavy rain") {
 		   type = "rain";
 	   } else {
-		   type = "snow";
+		   type = "none";
 	   }
-	}
+};
+		const myFunction = async() => {
+		const weather = await drawWeather()
+	return weather
+};
 Module.register("MMM-Snow-Automatic",{
 
 	defaults: {
 		flakeCount: 100,
 		theme: "winter"                 // pick from themes map below, i.e. winter, love
 	},
+
 
 	themes: {
 		"winter" : { 
@@ -55,6 +62,7 @@ Module.register("MMM-Snow-Automatic",{
 		return [ "MMM-Snow-Automatic.css" ]
 	},
 	getDom: function() {
+		myFunction()
 		var themeSettings = this.themes[this.config.theme];
 		var wrapper = document.createElement("div")
 		wrapper.className = "wrapper"
@@ -65,12 +73,11 @@ Module.register("MMM-Snow-Automatic",{
 
 			size = themeSettings.sizeFactor * (Math.random() * 0.75) + 0.25;
 			flakeImage = document.createElement("div")
-			
+
 			var flakeSuffix = Math.round(1 + Math.random() * (themeSettings.imagesCount - 1));
-			flakeImage.className = themeSettings.flakePrefix + flakeSuffix;
+			flakeImage.className = themeSettings.flakePrefix + flakeSuffix;			
 			flakeImage.style.transform = "scale(" + size +", " + size + ")";
 			flakeImage.style.opacity = size;
-
 			flake = document.createElement("div");
 			if(themeSettings.downwards) {
 				flake.className = "flake-downwards";
@@ -92,11 +99,12 @@ Module.register("MMM-Snow-Automatic",{
 			flake.style.left = ((Math.random() * 100) - 10) + "%";
 			flake.style.animationDelay = (Math.random() * 100) + "s";
 			flake.style.animationDuration = 100 - (Math.random() * 50 * size) + "s";
-
 			wrapper.appendChild(flake);
+
 		}
 		return wrapper;
 	}
 
 });
+
 
